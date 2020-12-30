@@ -1,7 +1,9 @@
 package com.nguyendinhquochieu.minishop.controller;
 
 import com.nguyendinhquochieu.minishop.entity.Cart;
+import com.nguyendinhquochieu.minishop.entity.SanPham;
 import com.nguyendinhquochieu.minishop.services.EmployeeService;
+import com.nguyendinhquochieu.minishop.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,6 +23,8 @@ public class APIController {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    ProductService productService;
     @GetMapping("HandleLogin")
     @ResponseBody
         public String HandleLogin(@RequestParam String email , @RequestParam String matkhau, ModelMap modelMap) {
@@ -35,9 +39,9 @@ public class APIController {
     @ResponseBody
     public String addCart(@RequestParam int masp, @RequestParam int masize,
                             @RequestParam int mamau, @RequestParam String tensp, @RequestParam String giatien,
-                            @RequestParam String tenmau, @RequestParam String tensize, @RequestParam int soluong, HttpSession httpSession){
+                            @RequestParam String tenmau, @RequestParam String tensize, @RequestParam int soluong,@RequestParam int machitiet, HttpSession httpSession){
 
-        if(httpSession.getAttribute("cart") == null) { //if card Session null -> create new!
+        if(httpSession.getAttribute("cart") == null) { //if cart Session null -> create new!
             List<Cart> cartList = new ArrayList<>();
             Cart cart = new Cart();
             cart.setMasp(masp);
@@ -47,6 +51,7 @@ public class APIController {
             cart.setGiatien(giatien);
             cart.setTenmau(tenmau);
             cart.setTensize(tensize);
+            cart.setMachitiet(machitiet);
             cart.setSoluong(1);
 
             cartList.add(cart);
@@ -65,6 +70,7 @@ public class APIController {
                 cart.setTenmau(tenmau);
                 cart.setTensize(tensize);
                 cart.setSoluong(1);
+                cart.setMachitiet(machitiet);
                 cartList.add(cart);
                 return cartList.size() + "";
             }else {
@@ -102,6 +108,26 @@ public class APIController {
         }
         return size;
     }
+    @GetMapping(path="AddProductAdmin",produces = "text/plain; charset=utf-8")
+    @ResponseBody
+    public String AddProductAdmin(@RequestParam int soluong) {
+
+        String html ="";
+        List<SanPham> sanPhamList = productService.getListHotProduct(soluong);
+        for (SanPham product: sanPhamList ) {
+            html+="<tr>";
+            html+="<td><div class=\"checkbox\"><label><input name=\"product-checkbox\" type=\"checkbox\" value=\"\"></label></div></td>\n";
+            html+="<td class=\"tensp\" data-masp='"+ product.getMasanpham()+"'>"+ product.getTensanpham()+"</td>";
+            html+="<td class=\"giatien\" >"+ product.getGiatien()+"</td>";
+            html+="<td class=\"gianhcho\">"+ product.getGianhcho()+"</td>";
+            html+="</tr>";
+        }
+        System.out.println(html);
+            return html;
+    }
+
+
+
     private int checkAvailable(int masp, int masize, int mamau, HttpSession httpSession){
         if(httpSession.getAttribute("cart") != null) {
             List<Cart> cartList = (List<Cart>) httpSession.getAttribute("cart");

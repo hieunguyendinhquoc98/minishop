@@ -4,11 +4,21 @@ public class Cart {
     int masp;
     int masize;
     int mamau;
+    int machitiet;
     String tensp;
     String giatien;
     String tenmau;
     String tensize;
     int soluong;
+
+    public int getMachitiet() {
+        return machitiet;
+    }
+
+    public void setMachitiet(int machitiet) {
+        this.machitiet = machitiet;
+    }
+
     public int getMasp() {
         return masp;
     }

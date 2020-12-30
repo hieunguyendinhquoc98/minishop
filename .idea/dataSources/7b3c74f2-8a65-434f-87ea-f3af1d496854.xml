@@ -1126,164 +1126,172 @@ masanpham</ColNames>
       <Position>6</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <key id="334" parent="288" name="PRIMARY">
+    <column id="334" parent="288" name="hinhthucgiaohang">
+      <Position>7</Position>
+      <DataType>varchar(45)|0s</DataType>
+    </column>
+    <column id="335" parent="288" name="ghichu">
+      <Position>8</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <key id="336" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>mahoadon</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="335" parent="289" name="makhuyenmai">
+    <column id="337" parent="289" name="makhuyenmai">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="336" parent="289" name="tenkhuyenmai">
+    <column id="338" parent="289" name="tenkhuyenmai">
       <Position>2</Position>
       <DataType>varchar(200)|0s</DataType>
     </column>
-    <column id="337" parent="289" name="thoigianbatdau">
+    <column id="339" parent="289" name="thoigianbatdau">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="338" parent="289" name="thoigianketthuc">
+    <column id="340" parent="289" name="thoigianketthuc">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="339" parent="289" name="mota">
+    <column id="341" parent="289" name="mota">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="340" parent="289" name="hinhkhuyenmai">
+    <column id="342" parent="289" name="hinhkhuyenmai">
       <Position>6</Position>
       <DataType>text|0s</DataType>
     </column>
-    <key id="341" parent="289" name="PRIMARY">
+    <key id="343" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>makhuyenmai</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="342" parent="290" name="mamau">
+    <column id="344" parent="290" name="mamau">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="343" parent="290" name="tenmau">
+    <column id="345" parent="290" name="tenmau">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <key id="344" parent="290" name="PRIMARY">
+    <key id="346" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>mamau</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="345" parent="291" name="manhanvien">
+    <column id="347" parent="291" name="manhanvien">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="346" parent="291" name="hoten">
+    <column id="348" parent="291" name="hoten">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
     </column>
-    <column id="347" parent="291" name="diachi">
+    <column id="349" parent="291" name="diachi">
       <Position>3</Position>
       <DataType>varchar(200)|0s</DataType>
     </column>
-    <column id="348" parent="291" name="gioitinh">
+    <column id="350" parent="291" name="gioitinh">
       <Position>4</Position>
       <DataType>tinyint(4)|0s</DataType>
     </column>
-    <column id="349" parent="291" name="cmnd">
+    <column id="351" parent="291" name="cmnd">
       <Position>5</Position>
       <DataType>char(14)|0s</DataType>
     </column>
-    <column id="350" parent="291" name="machucvu">
+    <column id="352" parent="291" name="machucvu">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="351" parent="291" name="email">
+    <column id="353" parent="291" name="email">
       <Position>7</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="352" parent="291" name="tendangnhap">
+    <column id="354" parent="291" name="tendangnhap">
       <Position>8</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="353" parent="291" name="matkhau">
+    <column id="355" parent="291" name="matkhau">
       <Position>9</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <index id="354" parent="291" name="FK_NHANVIEN_CHUCVU">
+    <index id="356" parent="291" name="FK_NHANVIEN_CHUCVU">
       <ColNames>machucvu</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="355" parent="291" name="PRIMARY">
+    <key id="357" parent="291" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>manhanvien</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="356" parent="291" name="FK_NHANVIEN_CHUCVU">
+    <foreign-key id="358" parent="291" name="FK_NHANVIEN_CHUCVU">
       <ColNames>machucvu</ColNames>
       <RefTableName>CHUCVU</RefTableName>
       <RefColNames>machucvu</RefColNames>
     </foreign-key>
-    <column id="357" parent="292" name="masanpham">
+    <column id="359" parent="292" name="masanpham">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="358" parent="292" name="madanhmuc">
+    <column id="360" parent="292" name="madanhmuc">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="359" parent="292" name="tensanpham">
+    <column id="361" parent="292" name="tensanpham">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="360" parent="292" name="giatien">
+    <column id="362" parent="292" name="giatien">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="361" parent="292" name="mota">
+    <column id="363" parent="292" name="mota">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="362" parent="292" name="hinhsanpham">
+    <column id="364" parent="292" name="hinhsanpham">
       <Position>6</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="363" parent="292" name="gianhcho">
+    <column id="365" parent="292" name="gianhcho">
       <Position>7</Position>
       <DataType>varchar(4)|0s</DataType>
     </column>
-    <index id="364" parent="292" name="FK_SANPHAM_DANHMUC">
+    <index id="366" parent="292" name="FK_SANPHAM_DANHMUC">
       <ColNames>madanhmuc</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="365" parent="292" name="PRIMARY">
+    <key id="367" parent="292" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>masanpham</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="366" parent="292" name="FK_SANPHAM_DANHMUC">
+    <foreign-key id="368" parent="292" name="FK_SANPHAM_DANHMUC">
       <ColNames>madanhmuc</ColNames>
       <RefTableName>DANHMUCSANPHAM</RefTableName>
       <RefColNames>madanhmuc</RefColNames>
     </foreign-key>
-    <column id="367" parent="293" name="masize">
+    <column id="369" parent="293" name="masize">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="368" parent="293" name="size">
+    <column id="370" parent="293" name="size">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <key id="369" parent="293" name="PRIMARY">
+    <key id="371" parent="293" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>masize</ColNames>
       <Primary>1</Primary>

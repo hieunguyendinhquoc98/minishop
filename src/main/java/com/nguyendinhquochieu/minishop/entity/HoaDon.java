@@ -28,6 +28,28 @@ public class HoaDon {
     @Column(name = "ngaylap")
     String ngaylap;
 
+    @Column(name = "hinhthucgiaohang")
+    String hinhthucgiaohang;
+    @Column(name ="ghichu")
+    String ghichu;
+
+
+    public String getHinhthucgiaohang() {
+        return hinhthucgiaohang;
+    }
+
+    public void setHinhthucgiaohang(String hinhthucgiaohang) {
+        this.hinhthucgiaohang = hinhthucgiaohang;
+    }
+
+    public String getGhichu() {
+        return ghichu;
+    }
+
+    public void setGhichu(String ghichu) {
+        this.ghichu = ghichu;
+    }
+
     public Set<ChiTietHoaDon> getListChiTietHoaDon() {
         return listChiTietHoaDon;
     }

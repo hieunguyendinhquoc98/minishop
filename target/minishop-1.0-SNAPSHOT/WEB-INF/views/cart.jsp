@@ -105,29 +105,29 @@
         <form action="" method="post">
             <div class="input-group">
                 <span class="input-group-addon">Tên người mua/nhận</span>
-                <input  type="text" class="form-control" name="nameOfReceiver">
+                <input  type="text" class="form-control" name="tenkhachhang">
             </div>
             <p><p/>
             <div class="input-group">
                 <span class="input-group-addon">Điện thoại liên lạc</span>
-                <input type="text" class="form-control" name="phone">
+                <input type="text" class="form-control" name="sodt">
             </div>
             <p></p>
             <div class="radio">
-                <label><input type="radio" name="typeOfShipping" checked>Giao hàng tận nơi</label>
+                <label><input type="radio" name="hinhthucgiaohang" value="Giao hàng tận nơi" checked>Giao hàng tận nơi</label>
             </div>
             <div class="radio">
-                <label><input type="radio" name="typeOfShipping">Nhận hàng tại cửa hàng</label>
+                <label><input type="radio" name="hinhthucgiaohang" value="Nhận hàng tại cửa hàng">Nhận hàng tại cửa hàng</label>
             </div>
             <p><p/>
             <div class="input-group">
                 <span class="input-group-addon">Địa chỉ nhận hàng</span>
-                <input type="text" class="form-control" name="address">
+                <input type="text" class="form-control" name="diachigiaohang">
             </div>
             <p></p>
             <div class="input-group">
                 <span class="input-group-addon">Ghi chú</span>
-                <textarea class="form-control" rows="7" id="note" name="note"></textarea>
+                <textarea class="form-control" rows="7" id="note" name="ghichu"></textarea>
             </div>
             <br>
             <input type="submit" class="btn btn-primary" value="Đặt hàng"/>

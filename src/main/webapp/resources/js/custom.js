@@ -44,6 +44,7 @@ $(function (){
         var tensize = $(this).closest("tr").find(".size").text();
         var tensp = $("#tensp").text();
         var giatien = $("#giatien").attr("data-value");
+        var machitiet = $(this).attr("data-machitiet");
         $.ajax({
             url: "/minishop/api/AddCart",
             type: "GET",
@@ -56,7 +57,8 @@ $(function (){
                 giatien: giatien,
                 tenmau: tenmau,
                 tensize: tensize,
-                soluong: soluong
+                soluong: soluong,
+                machitiet: machitiet
             },
             success: function (value) {//not affect functionality, just brackets[]
                 $("#cart").find("div").addClass("circle-cart")
@@ -141,6 +143,22 @@ $(function (){
                 $("#cart").find("div").html("<span>" + value + "</span>");
             }
         });
+    })
+    $(".paging-item").on("click", function () {
+        var numberOfPage = ($(this).text()- 1 )*5;
+        $.ajax({
+            url: "/minishop/api/AddProductAdmin",
+            type: "GET",
+            cache: false,
+            data: {
+                soluong: numberOfPage
+            }, success: function (value){
+                var tbody = $("#product-table").find("tbody");
+                tbody.empty();
+                tbody.append(value);
+            }
+        })
+
     })
 
 })

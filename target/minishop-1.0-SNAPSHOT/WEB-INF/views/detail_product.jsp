@@ -78,7 +78,7 @@
             <h2>Danh Mục</h2>
             <ul class="myMenu">
                 <c:forEach var="productIndex" items="${listProductIndex}">
-                    <li><a href='<c:url value="/product/${productIndex.madanhmuc}"/>'>${productIndex.tendanhmuc}</a></li>
+                    <li><a href='<c:url value="/product/${productIndex.madanhmuc}/${productIndex.tendanhmuc}"/>'>${productIndex.tendanhmuc}</a></li>
                     <li role="separator" class="divider"></li>
                 </c:forEach>
             </ul>
@@ -105,7 +105,7 @@
                                 <td class="mau" data-mamau="${detailedProduct.mausanpham.mamau}" data-masp="${detailedProduct.sanpham.masanpham}">${detailedProduct.mausanpham.tenmau}</td>
                                 <td class="size" data-masize="${detailedProduct.sizeSanPham.masize}">${detailedProduct.sizeSanPham.size}</td>
                                 <td class="soluong">${detailedProduct.soluong}</td>
-                                <td><button class="btn btn-success btn-cart">Giỏ hàng</button></td>
+                                <td><button data-machitiet="${detailedProduct.machitietsanpham}" class="btn btn-success btn-cart">Giỏ hàng</button></td>
                             </tr>
                             </tbody>
                         </c:forEach>

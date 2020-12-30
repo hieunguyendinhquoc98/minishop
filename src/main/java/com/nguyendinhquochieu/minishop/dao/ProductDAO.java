@@ -26,12 +26,11 @@ public class ProductDAO implements ProductImp {
         Session session = sessionFactory.getCurrentSession();
         List<SanPham> listHotProduct = new ArrayList<>();
 
-        if(index < 0) {
-            System.out.println("lay tu dau");
+        if(index < 0) {//get all product - reuse function
             return listHotProduct = (List<SanPham>) session.createQuery("from SanPham").getResultList();
         }else {
             System.out.println("lay tu index input");
-           return listHotProduct = (List<SanPham>) session.createQuery("from SanPham").setFirstResult(index).setMaxResults(12).getResultList();
+           return listHotProduct = (List<SanPham>) session.createQuery("from SanPham").setFirstResult(index).setMaxResults(5).getResultList();
         }
     }
 
