@@ -9,16 +9,14 @@ public class ChiTietSanPham {
     @Column(name = "machitietsanpham")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int machitietsanpham;
-
-
-    @OneToOne(cascade = CascadeType.ALL)
+    ///we must not delete the key of parent constraints , such as masanpham in table SanPham, so that, cascade is unnecessary
+    @OneToOne()
     @JoinColumn(name = "masanpham")
     SanPham sanpham;
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "masize")
     SizeSanPham sizeSanPham;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "mamau")
     MauSanPham mauSanPham;
     @Column(name = "soluong")

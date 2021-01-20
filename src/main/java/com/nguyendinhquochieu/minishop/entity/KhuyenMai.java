@@ -25,12 +25,22 @@ public class KhuyenMai {
     @Column(name = "hinhkhuyenmai")
     String tienkhuyenmai;
 
+    @Column(name = "giagiam")
+    int giagiam;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "CHITIETKHUYENMAI", joinColumns = {@JoinColumn(name="makhuyenmai", referencedColumnName = "makhuyenmai")},
             inverseJoinColumns = {@JoinColumn(name ="masanpham",referencedColumnName = "masanpham")}
             )
     Set<SanPham> listSanPham;
 
+
+    public int getGiagiam() {
+        return giagiam;
+    }
+
+    public void setGiagiam(int giagiam) {
+        this.giagiam = giagiam;
+    }
 
     public Set<SanPham> getListSanPham() {
         return listSanPham;

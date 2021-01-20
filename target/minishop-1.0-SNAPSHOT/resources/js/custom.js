@@ -143,11 +143,11 @@ $(function (){
                 $("#cart").find("div").html("<span>" + value + "</span>");
             }
         });
-    })
+    });
     $(".paging-item").on("click", function () {
         var numberOfPage = ($(this).text()- 1 )*5;
         $.ajax({
-            url: "/minishop/api/AddProductAdmin",
+            url: "/minishop/api/LoadProductAdmin",
             type: "GET",
             cache: false,
             data: {
@@ -158,7 +158,35 @@ $(function (){
                 tbody.append(value);
             }
         })
-
-    })
-
+    });
+    ///jQuery 1.5.x and below using attr
+    $("#check-all").on("change", function (){
+        if(this.checked){
+            $("#product-table input").each(function (){
+                $(this).prop("checked",true);
+            })
+        }else{
+            $("#product-table input").each(function (){
+                $(this).prop("checked",false);
+            })
+        }
+    });
+    $("#btn-delete-product-admin").on("click",function (){
+        $("#product-table > tbody input:checked").each(function (){
+            var masanpham= $(this).val();
+            var This = $(this);
+            $.ajax({
+                url: "/minishop/api/DeleteProductAdmin",
+                type: "GET",
+                cache: false,
+                data: {
+                    masanpham: masanpham
+                }, success: function (value){
+                    if(value == "true"){
+                        This.closest("tr").remove();
+                    }
+                }
+            })
+        })
+    });
 })

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +37,9 @@ public class APIController {
     @GetMapping("AddCart")
     @ResponseBody
     public String addCart(@RequestParam int masp, @RequestParam int masize,
-                            @RequestParam int mamau, @RequestParam String tensp, @RequestParam String giatien,
-                            @RequestParam String tenmau, @RequestParam String tensize, @RequestParam int soluong,@RequestParam int machitiet, HttpSession httpSession){
+                          @RequestParam int mamau, @RequestParam String tensp, @RequestParam String giatien,
+                          @RequestParam String tenmau, @RequestParam String tensize, @RequestParam int soluong,
+                          @RequestParam int machitiet, HttpSession httpSession){
 
         if(httpSession.getAttribute("cart") == null) { //if cart Session null -> create new!
             List<Cart> cartList = new ArrayList<>();
@@ -108,26 +108,28 @@ public class APIController {
         }
         return size;
     }
-    @GetMapping(path="AddProductAdmin",produces = "text/plain; charset=utf-8")
+    @GetMapping(path="LoadProductAdmin",produces = "text/plain; charset=utf-8")
     @ResponseBody
-    public String AddProductAdmin(@RequestParam int soluong) {
+    public String LoadProductAdmin(@RequestParam int soluong) {
 
         String html ="";
         List<SanPham> sanPhamList = productService.getListHotProduct(soluong);
         for (SanPham product: sanPhamList ) {
             html+="<tr>";
-            html+="<td><div class=\"checkbox\"><label><input name=\"product-checkbox\" type=\"checkbox\" value=\"\"></label></div></td>\n";
+            html+="<td><div class=\"checkbox\"><label><input name=\"product-checkbox\" type=\"checkbox\" value=\" '" +product.getMasanpham()+" '\"></label></div></td>\n";
             html+="<td class=\"tensp\" data-masp='"+ product.getMasanpham()+"'>"+ product.getTensanpham()+"</td>";
             html+="<td class=\"giatien\" >"+ product.getGiatien()+"</td>";
             html+="<td class=\"gianhcho\">"+ product.getGianhcho()+"</td>";
             html+="</tr>";
         }
-        System.out.println(html);
             return html;
     }
-
-
-
+    @GetMapping(path="DeleteProductAdmin")
+    @ResponseBody
+    public String DeleteProductAdmin(@RequestParam int masanpham) {
+        return productService.deleteProductById(masanpham) + "";
+    }
+    //support function for add to cart api "/AddCart"
     private int checkAvailable(int masp, int masize, int mamau, HttpSession httpSession){
         if(httpSession.getAttribute("cart") != null) {
             List<Cart> cartList = (List<Cart>) httpSession.getAttribute("cart");

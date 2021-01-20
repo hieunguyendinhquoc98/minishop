@@ -27,4 +27,9 @@ public class ProductService implements ProductImp {
     public List<SanPham> getListProductByIndex(int index) {
         return productDAO.getListProductByIndex(index);
     }
+
+    @Override
+    public boolean deleteProductById(int idProduct) {
+        return productDAO.deleteProductById(idProduct);
+    }
 }

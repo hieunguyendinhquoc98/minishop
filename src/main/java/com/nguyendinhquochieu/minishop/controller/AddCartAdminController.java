@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/addProductAdmin")
+@RequestMapping("/ProductAdmin")
 @EnableWebMvc
 public class AddCartAdminController {
     @Autowired
@@ -29,6 +29,6 @@ public class AddCartAdminController {
         modelMap.addAttribute("listSanPham",list);
         modelMap.addAttribute("allProduct", listAllProduct);
         modelMap.addAttribute("sumOfPage",sumOfPage);
-        return "add_product_admin";
+        return "product_admin";
     }
 }

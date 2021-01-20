@@ -41,47 +41,59 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <div class="page-container">
-    <!--/content-inner-->
-    <div class="left-content">
-        <table class="table" id="product-table">
-            <thead>
+    <div class="row">
+        <!--/content-inner-->
+        <div class="left-content">
+            <h3>Sản phẩm</h3>
+            <div style="float: right">
+                <button class="btn btn-primary">
+                    Thêm sản phẩm
+                </button>
+                <button class="btn btn-danger" id="btn-delete-product-admin">
+                    Xoá
+                </button>
+            </div>
+            <table class="table" id="product-table">
+                <thead>
                 <tr>
                     <td>
                         <div class="checkbox">
-                            <label><input type="checkbox" value=""></label>
+                            <label><input type="checkbox" id="check-all" value=""></label>
                         </div>
                     </td>
                     <td><h4>Tên sản phẩm</h4></td>
                     <td><h4>Giá tiền</h4></td>
                     <td><h4>Giành cho</h4></td>
                 </tr>
-            </thead>
+                </thead>
                 <tbody>
                 <c:forEach var="product" items="${listSanPham}">
                     <tr>
-                        <td><div class="checkbox"><label><input name="product-checkbox" type="checkbox" value=""></label></div></td>
+                        <td><div class="checkbox"><label><input name="product-checkbox" type="checkbox" value="${product.masanpham}"></label></div></td>
                         <td class="tensp" data-masp="${product.masanpham}">${product.tensanpham}</td>
                         <td class="giatien" >${product.giatien}</td>
                         <td class="gianhcho">${product.gianhcho}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
-        </table>
+            </table>
 
-        <ul class="pagination pagination-sm">
-            <c:forEach var="i" begin="1" end="${sumOfPage}">
-                <c:choose >
-                    <c:when test="${i == 1}">
-                        <li class="active paging-item"><a href="#">${i}</a></li>
-                    </c:when>
-                    <c:when test="${i > 1}">
-                        <li class="paging-item"><a href="#">${i}</a></li>
-                    </c:when>
-                </c:choose>
-            </c:forEach>
-        </ul>
+            <ul class="pagination pagination-sm">
+                <c:forEach var="i" begin="1" end="${sumOfPage}">
+                    <c:choose >
+                        <c:when test="${i == 1}">
+                            <li class="active paging-item"><a href="#">${i}</a></li>
+                        </c:when>
+                        <c:when test="${i > 1}">
+                            <li class="paging-item"><a href="#">${i}</a></li>
+                        </c:when>
+                    </c:choose>
+                </c:forEach>
+            </ul>
+        </div>
+        <!--//content-inner-->
     </div>
-    <!--//content-inner-->
+
     <!--/sidebar-menu-->
     <div class="sidebar-menu">
         <header class="logo1">
@@ -93,7 +105,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <li><a href="dashboard.jsp"><i class="fa fa-tachometer"></i> <span>Dashboard</span><div class="clearfix"></div></a></li>
 
 
-                <li id="menu-academico" ><a href="<c:url value="/addProductAdmin"/>"><i class="fa fa-envelope nav_icon"></i><span>Sản phẩm</span><div class="clearfix"></div></a></li>
+                <li id="menu-academico" ><a href="<c:url value="/ProductAdmin"/>"><i class="fa fa-envelope nav_icon"></i><span>Sản phẩm</span><div class="clearfix"></div></a></li>
                 <li><a href="gallery.html"><i class="fa fa-picture-o" aria-hidden="true"></i><span>Gallery</span><div class="clearfix"></div></a></li>
                 <li id="menu-academico" ><a href="charts.html"><i class="fa fa-bar-chart"></i><span>Charts</span><div class="clearfix"></div></a></li>
                 <li id="menu-academico" ><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i><span> Short Codes</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>

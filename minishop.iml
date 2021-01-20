@@ -20,7 +20,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="minishop" />
+          <factory-entry name="minishop" value="a1b9306d-ae8d-4b1d-829e-efde5ddbf738" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

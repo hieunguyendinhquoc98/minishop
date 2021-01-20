@@ -9,4 +9,5 @@ public interface ProductImp {
     List<SanPham> getListHotProduct(int index);
     List<SanPham> getListProductByIndex(int index);
     SanPham getProductById(int idProduct);
+    boolean deleteProductById(int idProduct);
 }
