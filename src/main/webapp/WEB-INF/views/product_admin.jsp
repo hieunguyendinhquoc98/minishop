@@ -4,12 +4,6 @@
   Date: 12/30/2020
   Time: 15:02
 --%>
-<%--
-  Created by IntelliJ IDEA.
-  User: Hieu Nguyen Dinh Quoc
-  Date: 12/23/2020
-  Time: 12:29
---%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
@@ -224,8 +218,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             hideHover: 'auto',
             resize: true
         });
-
-
     });
 </script>
 </body>
