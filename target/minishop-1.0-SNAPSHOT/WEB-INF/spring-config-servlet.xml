@@ -45,7 +45,10 @@
         <property name="packagesToScan" value="com.nguyendinhquochieu.minishop.entity" />
         <property name="hibernateProperties" value="classpath:hibernate.properties" />
     </bean>
-<!--    IMPORT IMG, CSS, JS resources-->
+    <!--    for upload file-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+    <!--    IMPORT IMG, CSS, JS resources-->
     <mvc:annotation-driven></mvc:annotation-driven>
     <mvs:resources mapping="/resources/**" location="/resources/"></mvs:resources>
 </beans>

@@ -30,7 +30,7 @@ public class ProductDAO implements ProductImp {
             return listHotProduct = (List<SanPham>) session.createQuery("from SanPham").getResultList();
         }else {
             System.out.println("lay tu index input");
-           return listHotProduct = (List<SanPham>) session.createQuery("from SanPham").setFirstResult(index).setMaxResults(5).getResultList();
+           return listHotProduct = (List<SanPham>) session.createQuery("from SanPham").setFirstResult(index).setMaxResults(12).getResultList();
         }
     }
 

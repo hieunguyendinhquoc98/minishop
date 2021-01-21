@@ -189,4 +189,27 @@ $(function (){
             })
         })
     });
+    var files = [];
+    $("#image-new-product").on("change",function (events){
+        files = events.target.files;
+        forms = new FormData();
+        forms.append("file",files[0]);
+
+        $.ajax({
+            url: "/minishop/api/UploadFile",
+            type: "POST",
+            cache: false,
+            data: forms,
+            contentType: false,
+            processData: false,
+            enctype: "multipart/form-data",
+            success: function (value){
+            }
+        })
+    });
+    $("body").on("click",".btn-chitiet",function (){
+        $(this).remove();
+        var chitietClone = $("#chi-tiet-san-pham-admin").clone().removeAttr("id");
+        $("#container-chitiet-sanpham").append(chitietClone);
+    });
 })

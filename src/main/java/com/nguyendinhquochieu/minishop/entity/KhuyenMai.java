@@ -33,7 +33,6 @@ public class KhuyenMai {
             )
     Set<SanPham> listSanPham;
 
-
     public int getGiagiam() {
         return giagiam;
     }

@@ -303,6 +303,15 @@ a.circle-avatar :hover{
     margin-top: -30px;
     margin-left: 15px;
 }
+
+#chi-tiet-san-pham-admin{
+    display: none;
+}
+.btn-chitiet{
+    display: block !important;
+    margin-right: 0 !important;
+    margin-left: auto !important;
+}
 /*END CSS DETAIL*/
 @media (max-width: 576px) {
     .navbar-center{

@@ -21,7 +21,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- Custom CSS -->
     <link href="<c:url value="/resources/css/style.css"/>"  rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="<c:url value="/resources/css/morris.css"/>"  type="text/css"/>
-    <link rel="stylesheet" href="<c:url value="/resources/styles/styles.css"/>"  type="text/css"/>
     <!-- Graph CSS -->
     <link href="<c:url value="/resources/css/font-awesome.css"/>"  rel="stylesheet">
     <!-- jQuery -->
@@ -37,75 +36,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <div class="page-container">
-    <div class="left-content">
-        <div class="row">
-            <h2>Sản phẩm</h2>
-            <div class="col-md-5 col-sm-12 form-group">
-                <label for="product-name">Tên sản phẩm:</label><br>
-                <input id="product-name" name="tensanpham" class="form-control" type="text" placeholder="Nhập tên sản phẩm"/><br>
+    <div class="row">
 
-                <label for="price">Giá tiền:</label><br>
-                <input id="price" name="giatien" class="form-control" type="text" placeholder="Nhập giá tiền"/><br>
+        <div>
 
-                <label for="index">Danh mục:</label>
-                <select class="form-control" id="index">
-                    <c:forEach var="index" items="${listProductIndex}">
-                        <option value="${index.madanhmuc}">${index.tendanhmuc}</option>
-                    </c:forEach>
-                </select><br>
+        </div>
 
-                <label for="description">Mô tả:</label><br>
-                <textarea rows="5"  name="mota" id="description" class="form-control" type="text" placeholder="Mô tả"></textarea><br>
-
-                <label for="image-new-product">Hình ảnh:</label><br>
-                <input id="image-new-product" class="form-control" type="file" placeholder=""/><br>
-
-                <div id="container-chitiet-sanpham">
-                    <label>Chi tiết:</label><br>
-                    <select class="form-control" id="size">
-                        <c:forEach var="index" items="${listSize}">
-                            <option name="" value="${index.masize}">${index.size}</option>
-                        </c:forEach>
-                    </select><br>
-
-                    <select class="form-control" id="mau">
-                        <c:forEach var="index" items="${listColor}">
-                            <option value="${index.mamau}">${index.tenmau}</option>
-                        </c:forEach>
-                    </select><br>
-                    <input id="soluong" class="form-control" type="number" placeholder="Số lượng"/><br>
-                    <button class="btn-success btn btn-chitiet fa fa-plus-circle">Thêm chi tiết</button>
-                </div>
-
-                <div id="chi-tiet-san-pham-admin">
-                    <label>Chi tiết:</label><br>
-                    <select class="form-control" id="size">
-                        <c:forEach var="index" items="${listSize}">
-                            <option name="" value="${index.masize}">${index.size}</option>
-                        </c:forEach>
-                    </select><br>
-
-                    <select class="form-control" id="mau">
-                        <c:forEach var="index" items="${listColor}">
-                            <option value="${index.mamau}">${index.tenmau}</option>
-                        </c:forEach>
-                    </select><br>
-                    <input id="soluong" class="form-control" type="number" placeholder="Số lượng"/><br>
-                    <button class="btn-success btn btn-chitiet fa fa-plus-circle">Thêm chi tiết</button>
-                </div>
-
-                <span>Giành cho:</span><br>
-                <label class="radio-inline"><input type="radio" name="gianhcho">Nam</label>
-                <label class="radio-inline"><input type="radio" name="gianhcho">Nữ</label>
-                <br><br>
-                <p>
-                    <button class="btn btn-success fa fa-cloud-upload">
+        <div class="col-md-6 col-sm-12">
+            <!--/content-inner-->
+            <div class="left-content">
+                <h3>Sản phẩm</h3>
+                <div style="float: right">
+                    <button class="btn btn-primary">
                         Thêm sản phẩm
                     </button>
-                </p>
-            </div>
-            <div class="col-md-7 col-sm-12">
-                <!--/content-inner-->
+                    <button class="btn btn-danger" id="btn-delete-product-admin">
+                        Xoá
+                    </button>
+                </div>
                 <table class="table" id="product-table">
                     <thead>
                     <tr>
@@ -129,12 +77,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </tr>
                     </c:forEach>
                     </tbody>
-                </table><br>
-                <div>
-                    <button class="btn btn-danger fa fa-remove" id="btn-delete-product-admin">
-                        Xoá
-                    </button>
-                </div>
+                </table>
+
                 <ul class="pagination pagination-sm">
                     <c:forEach var="i" begin="1" end="${sumOfPage}">
                         <c:choose >
@@ -147,12 +91,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </c:choose>
                     </c:forEach>
                 </ul>
-
-                <!--//content-inner-->
             </div>
+            <!--//content-inner-->
         </div>
-
-
 
     </div>
 

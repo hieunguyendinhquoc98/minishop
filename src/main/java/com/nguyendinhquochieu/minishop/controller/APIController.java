@@ -2,15 +2,24 @@ package com.nguyendinhquochieu.minishop.controller;
 
 import com.nguyendinhquochieu.minishop.entity.Cart;
 import com.nguyendinhquochieu.minishop.entity.SanPham;
+import com.nguyendinhquochieu.minishop.services.ColorService;
 import com.nguyendinhquochieu.minishop.services.EmployeeService;
 import com.nguyendinhquochieu.minishop.services.ProductService;
+import com.nguyendinhquochieu.minishop.services.SizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -24,6 +33,10 @@ public class APIController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    ServletContext context;
+
     @GetMapping("HandleLogin")
     @ResponseBody
         public String HandleLogin(@RequestParam String email , @RequestParam String matkhau, ModelMap modelMap) {
@@ -129,6 +142,29 @@ public class APIController {
     public String DeleteProductAdmin(@RequestParam int masanpham) {
         return productService.deleteProductById(masanpham) + "";
     }
+    @PostMapping(path="UploadFile")
+    @ResponseBody
+    public String UploadFile(MultipartHttpServletRequest multipartHttpServletRequest) {
+        String path = context.getRealPath("/resources/image/sanpham/");
+        Iterator<String> listNames = multipartHttpServletRequest.getFileNames();
+        MultipartFile multipartFile = multipartHttpServletRequest.getFile(listNames.next());
+        File file = null;
+        if (multipartFile != null) {
+            file = new File(path + multipartFile.getOriginalFilename());
+        }
+        try {
+            if (multipartFile != null) {
+                multipartFile.transferTo(file);
+                System.out.println("upload file thanh cong! - save in server tomcat first");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "true";
+    }
+
+
     //support function for add to cart api "/AddCart"
     private int checkAvailable(int masp, int masize, int mamau, HttpSession httpSession){
         if(httpSession.getAttribute("cart") != null) {

@@ -1,8 +1,9 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Hieu Nguyen Dinh Quoc
-  Date: 12/30/2020
-  Time: 15:02
+  User: NIG4HC
+  Date: 1/21/2021
+  Time: 1:25 PM
+  To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -20,6 +21,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- Custom CSS -->
     <link href="<c:url value="/resources/css/style.css"/>"  rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="<c:url value="/resources/css/morris.css"/>"  type="text/css"/>
+    <link rel="stylesheet" href="<c:url value="/resources/styles/styles.css"/>"  type="text/css"/>
     <!-- Graph CSS -->
     <link href="<c:url value="/resources/css/font-awesome.css"/>"  rel="stylesheet">
     <!-- jQuery -->
@@ -35,57 +37,123 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <div class="page-container">
-    <div class="row">
-        <!--/content-inner-->
-        <div class="left-content">
-            <h3>Sản phẩm</h3>
-            <div style="float: right">
-                <button class="btn btn-primary">
-                    Thêm sản phẩm
-                </button>
-                <button class="btn btn-danger" id="btn-delete-product-admin">
-                    Xoá
-                </button>
-            </div>
-            <table class="table" id="product-table">
-                <thead>
-                <tr>
-                    <td>
-                        <div class="checkbox">
-                            <label><input type="checkbox" id="check-all" value=""></label>
-                        </div>
-                    </td>
-                    <td><h4>Tên sản phẩm</h4></td>
-                    <td><h4>Giá tiền</h4></td>
-                    <td><h4>Giành cho</h4></td>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="product" items="${listSanPham}">
-                    <tr>
-                        <td><div class="checkbox"><label><input name="product-checkbox" type="checkbox" value="${product.masanpham}"></label></div></td>
-                        <td class="tensp" data-masp="${product.masanpham}">${product.tensanpham}</td>
-                        <td class="giatien" >${product.giatien}</td>
-                        <td class="gianhcho">${product.gianhcho}</td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+    <div class="left-content">
+        <div class="row">
+            <h2>Sản phẩm</h2>
+            <div class="col-md-5 col-sm-12 form-group">
+                <label for="product-name">Tên sản phẩm:</label><br>
+                <input id="product-name" name="tensanpham" class="form-control" type="text" placeholder="Nhập tên sản phẩm"/><br>
 
-            <ul class="pagination pagination-sm">
-                <c:forEach var="i" begin="1" end="${sumOfPage}">
-                    <c:choose >
-                        <c:when test="${i == 1}">
-                            <li class="active paging-item"><a href="#">${i}</a></li>
-                        </c:when>
-                        <c:when test="${i > 1}">
-                            <li class="paging-item"><a href="#">${i}</a></li>
-                        </c:when>
-                    </c:choose>
-                </c:forEach>
-            </ul>
+                <label for="price">Giá tiền:</label><br>
+                <input id="price" name="giatien" class="form-control" type="text" placeholder="Nhập giá tiền"/><br>
+
+                <label for="index">Danh mục:</label>
+                <select class="form-control" id="index">
+                    <c:forEach var="index" items="${listProductIndex}">
+                        <option value="${index.madanhmuc}">${index.tendanhmuc}</option>
+                    </c:forEach>
+                </select><br>
+
+                <label for="description">Mô tả:</label><br>
+                <textarea rows="5"  name="mota" id="description" class="form-control" type="text" placeholder="Mô tả"></textarea><br>
+
+                <label for="image-new-product">Hình ảnh:</label><br>
+                <input id="image-new-product" class="form-control" type="file" placeholder=""/><br>
+
+                <div id="container-chitiet-sanpham">
+                    <label>Chi tiết:</label><br>
+                    <select class="form-control" id="size">
+                        <c:forEach var="index" items="${listSize}">
+                            <option name="" value="${index.masize}">${index.size}</option>
+                        </c:forEach>
+                    </select><br>
+
+                    <select class="form-control" id="mau">
+                        <c:forEach var="index" items="${listColor}">
+                            <option value="${index.mamau}">${index.tenmau}</option>
+                        </c:forEach>
+                    </select><br>
+                    <input id="soluong" class="form-control" type="number" placeholder="Số lượng"/><br>
+                    <button class="btn-success btn btn-chitiet fa fa-plus-circle">Thêm chi tiết</button>
+                </div>
+
+                <div id="chi-tiet-san-pham-admin">
+                    <label>Chi tiết:</label><br>
+                    <select class="form-control" id="size">
+                        <c:forEach var="index" items="${listSize}">
+                            <option name="" value="${index.masize}">${index.size}</option>
+                        </c:forEach>
+                    </select><br>
+
+                    <select class="form-control" id="mau">
+                        <c:forEach var="index" items="${listColor}">
+                            <option value="${index.mamau}">${index.tenmau}</option>
+                        </c:forEach>
+                    </select><br>
+                    <input id="soluong" class="form-control" type="number" placeholder="Số lượng"/><br>
+                    <button class="btn-success btn btn-chitiet fa fa-plus-circle">Thêm chi tiết</button>
+                </div>
+
+                <span>Giành cho:</span><br>
+                <label class="radio-inline"><input type="radio" name="gianhcho">Nam</label>
+                <label class="radio-inline"><input type="radio" name="gianhcho">Nữ</label>
+                <br><br>
+                <p>
+                    <button class="btn btn-success fa fa-cloud-upload">
+                        Thêm sản phẩm
+                    </button>
+                </p>
+            </div>
+            <div class="col-md-7 col-sm-12">
+                <!--/content-inner-->
+                <table class="table" id="product-table">
+                    <thead>
+                    <tr>
+                        <td>
+                            <div class="checkbox">
+                                <label><input type="checkbox" id="check-all" value=""></label>
+                            </div>
+                        </td>
+                        <td><h4>Tên sản phẩm</h4></td>
+                        <td><h4>Giá tiền</h4></td>
+                        <td><h4>Giành cho</h4></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="product" items="${listSanPham}">
+                        <tr>
+                            <td><div class="checkbox"><label><input name="product-checkbox" type="checkbox" value="${product.masanpham}"></label></div></td>
+                            <td class="tensp" data-masp="${product.masanpham}">${product.tensanpham}</td>
+                            <td class="giatien" >${product.giatien}</td>
+                            <td class="gianhcho">${product.gianhcho}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table><br>
+                <div>
+                    <button class="btn btn-danger fa fa-remove" id="btn-delete-product-admin">
+                        Xoá
+                    </button>
+                </div>
+                <ul class="pagination pagination-sm">
+                    <c:forEach var="i" begin="1" end="${sumOfPage}">
+                        <c:choose >
+                            <c:when test="${i == 1}">
+                                <li class="active paging-item"><a href="#">${i}</a></li>
+                            </c:when>
+                            <c:when test="${i > 1}">
+                                <li class="paging-item"><a href="#">${i}</a></li>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>
+                </ul>
+
+                <!--//content-inner-->
+            </div>
         </div>
-        <!--//content-inner-->
+
+
+
     </div>
 
     <!--/sidebar-menu-->
@@ -96,10 +164,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
         <div class="menu">
             <ul id="menu" >
-                <li><a href="dashboard.jsp"><i class="fa fa-tachometer"></i> <span>Dashboard</span><div class="clearfix"></div></a></li>
+                <li><a href="<c:url value="/dashboard"/> "><i class="fa fa-tachometer"></i> <span>Dashboard</span><div class="clearfix"></div></a></li>
 
 
-                <li id="menu-academico" ><a href="<c:url value="/ProductAdmin"/>"><i class="fa fa-envelope nav_icon"></i><span>Sản phẩm</span><div class="clearfix"></div></a></li>
+                <li id="menu-academico" ><a href="<c:url value="/ProductAdmin"/>"><i class="fa fa-picture-o"></i><span>Sản phẩm</span><div class="clearfix"></div></a></li>
                 <li><a href="gallery.html"><i class="fa fa-picture-o" aria-hidden="true"></i><span>Gallery</span><div class="clearfix"></div></a></li>
                 <li id="menu-academico" ><a href="charts.html"><i class="fa fa-bar-chart"></i><span>Charts</span><div class="clearfix"></div></a></li>
                 <li id="menu-academico" ><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i><span> Short Codes</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
