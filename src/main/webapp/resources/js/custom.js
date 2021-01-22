@@ -190,11 +190,12 @@ $(function (){
         })
     });
     var files = [];
+    var tenhinh ="";
     $("#image-new-product").on("change",function (events){
         files = events.target.files;
+        tenhinh = files[0].name;
         forms = new FormData();
         forms.append("file",files[0]);
-
         $.ajax({
             url: "/minishop/api/UploadFile",
             type: "POST",
@@ -221,32 +222,35 @@ $(function (){
         var detailedProArr = [];
 
         $.each(fields, function(i, field){
-            json[field.name] = field.value;
+            if(field.name !== "mausanpham" && field.name !=="sizesanpham" && field.name !=="soluong")
+                json[field.name] = field.value;
         });
         $("#container-chitiet-sanpham > .chitiet-sanpham").each(function (){
             var detailProObject = {};
             mausanpham = $(this).find('select[name="mausanpham"]').val();
             sizesanpham = $(this).find('select[name="sizesanpham"]').val();
             soluong = $(this).find('input[name="soluong"]').val();
-            detailProObject["mausanpham"] = mausanpham;
-            detailProObject["sizesanpham"] = sizesanpham;
+            detailProObject["mauSanPham"] = mausanpham;
+            detailProObject["sizeSanPham"] = sizesanpham;
             detailProObject["soluong"] = soluong;
             detailedProArr.push(detailProObject);
 
         })
         json["chitietsanpham"] = detailedProArr;
-        // $.ajax({
-        //     url: "/minishop/api/AddProductAdmin",
-        //     type: "POST",
-        //     cache: false,
-        //     data: { dataJson: JSON.stringify(json)
-        //     },
-        //     success: function (value){
-        //         if(value == "true") {
-        //             url = window.location.href;
-        //             window.location = url;
-        //         }
-        //     }
-        // })
+        json["hinhsanpham"] = tenhinh;
+        $.ajax({
+            url: "/minishop/api/AddProductAdmin",
+            type: "POST",
+            cache: false,
+            data: { dataJson: JSON.stringify(json)
+            },
+            success: function (value){
+                if(value == "true") {
+                    alert("them sp thanh cong!");
+                    url = window.location.href;
+                    window.location = url;
+                }
+            }
+        })
     });
 })

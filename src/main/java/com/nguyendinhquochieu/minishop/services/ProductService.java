@@ -32,4 +32,9 @@ public class ProductService implements ProductImp {
     public boolean deleteProductById(int idProduct) {
         return productDAO.deleteProductById(idProduct);
     }
+
+    @Override
+    public boolean addProduct(SanPham sanPham) {
+        return productDAO.addProduct(sanPham);
+    }
 }

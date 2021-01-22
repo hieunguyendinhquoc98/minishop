@@ -1,7 +1,8 @@
 package com.nguyendinhquochieu.minishop.controller;
 
-import com.nguyendinhquochieu.minishop.entity.Cart;
-import com.nguyendinhquochieu.minishop.entity.SanPham;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nguyendinhquochieu.minishop.entity.*;
 import com.nguyendinhquochieu.minishop.services.ColorService;
 import com.nguyendinhquochieu.minishop.services.EmployeeService;
 import com.nguyendinhquochieu.minishop.services.ProductService;
@@ -18,9 +19,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 @Controller
@@ -167,8 +166,57 @@ public class APIController {
     @PostMapping(path="AddProductAdmin")
     @ResponseBody
     public String AddProductAdmin(@RequestParam String dataJson) {
+        System.out.println(dataJson);
         //{} is json object, [] -> json array
-        return "";
+        ObjectMapper objectMapper = new ObjectMapper();
+        SanPham sanPham = new SanPham();
+        try {
+            DanhMucSanPham danhMucSanPham = new DanhMucSanPham();
+
+            JsonNode jsonNode = objectMapper.readTree(dataJson);
+
+            danhMucSanPham.setMadanhmuc(jsonNode.get("danhMucSanPham").asInt());
+            JsonNode jsonChiTiet = jsonNode.get("chitietsanpham");
+            Set<ChiTietSanPham> listChiTiet = new HashSet<>();
+
+            for(JsonNode objectChiTiet : jsonChiTiet){
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
+
+                MauSanPham mauSanPham = new MauSanPham();
+                mauSanPham.setMamau(objectChiTiet.get("mauSanPham").asInt());
+                chiTietSanPham.setMausanpham(mauSanPham);
+
+                SizeSanPham sizeSanPham = new SizeSanPham();
+                sizeSanPham.setMasize(objectChiTiet.get("sizeSanPham").asInt());
+                chiTietSanPham.setSizeSanPham(sizeSanPham);
+
+                chiTietSanPham.setSoluong(objectChiTiet.get("soluong").asInt());
+                listChiTiet.add(chiTietSanPham);
+            }
+            String tensanpham = jsonNode.get("tensanpham").asText();
+            String giatien = jsonNode.get("giatien").asText();
+            String mota = jsonNode.get("mota").asText();
+            String hinhsanpham = jsonNode.get("hinhsanpham").asText();
+            String gianhcho = jsonNode.get("gianhcho").asText();
+
+            sanPham.setChitietsanpham(listChiTiet);
+            sanPham.setDanhMucSanPham(danhMucSanPham);
+            sanPham.setTensanpham(tensanpham);
+            sanPham.setGiatien(giatien);
+            sanPham.setMota(mota);
+            sanPham.setHinhsanpham(hinhsanpham);
+            sanPham.setGianhcho(gianhcho);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(productService.addProduct(sanPham)){
+            System.out.println("Them sp thanh cong" + productService.addProduct(sanPham));
+            return ""+ productService.addProduct(sanPham);
+        }
+        else {
+            System.out.println("Them sp that bai" + productService.addProduct(sanPham));
+            return ""+ productService.addProduct(sanPham);
+        }
     }
 
     //support function for add to cart api "/AddCart"

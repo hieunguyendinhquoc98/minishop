@@ -69,4 +69,16 @@ public class ProductDAO implements ProductImp {
 
         return sanPham != null;
     }
+
+    @Override
+    @Transactional
+    public boolean addProduct(SanPham sanPham) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(sanPham);
+        if(sanPham != null) {
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

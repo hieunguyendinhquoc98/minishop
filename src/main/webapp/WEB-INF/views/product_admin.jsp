@@ -53,7 +53,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <label class="radio-inline"><input type="radio" name="gianhcho" value="nu">Nữ</label><br>
 
                 <label for="index">Danh mục:</label>
-                <select name="danhmucsanpham" class="form-control" id="index">
+                <select name="danhMucSanPham" class="form-control" id="index">
                     <c:forEach var="index" items="${listProductIndex}">
                         <option value="${index.madanhmuc}">${index.tendanhmuc}</option>
                     </c:forEach>
