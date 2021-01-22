@@ -41,14 +41,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="row">
             <h2>Sản phẩm</h2>
             <div class="col-md-5 col-sm-12 form-group">
+                <form action="" id="form-sanpham">
                 <label for="product-name">Tên sản phẩm:</label><br>
                 <input id="product-name" name="tensanpham" class="form-control" type="text" placeholder="Nhập tên sản phẩm"/><br>
 
                 <label for="price">Giá tiền:</label><br>
-                <input id="price" name="giatien" class="form-control" type="text" placeholder="Nhập giá tiền"/><br>
+                <input id="price" name="giatien" class="form-control" type="number" placeholder="Nhập giá tiền"/><br>
+
+                <span>Giành cho:</span><br>
+                <label class="radio-inline"><input type="radio" name="gianhcho" value="nam">Nam</label>
+                <label class="radio-inline"><input type="radio" name="gianhcho" value="nu">Nữ</label><br>
 
                 <label for="index">Danh mục:</label>
-                <select class="form-control" id="index">
+                <select name="danhmucsanpham" class="form-control" id="index">
                     <c:forEach var="index" items="${listProductIndex}">
                         <option value="${index.madanhmuc}">${index.tendanhmuc}</option>
                     </c:forEach>
@@ -61,45 +66,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <input id="image-new-product" class="form-control" type="file" placeholder=""/><br>
 
                 <div id="container-chitiet-sanpham">
-                    <label>Chi tiết:</label><br>
-                    <select class="form-control" id="size">
-                        <c:forEach var="index" items="${listSize}">
-                            <option name="" value="${index.masize}">${index.size}</option>
-                        </c:forEach>
-                    </select><br>
+                    <div class="chitiet-sanpham">
+                        <label>Chi tiết:</label><br>
+                        <select name="sizesanpham" class="form-control" id="size">
+                            <c:forEach var="index" items="${listSize}">
+                                <option value="${index.masize}">${index.size}</option>
+                            </c:forEach>
+                        </select><br>
 
-                    <select class="form-control" id="mau">
-                        <c:forEach var="index" items="${listColor}">
-                            <option value="${index.mamau}">${index.tenmau}</option>
-                        </c:forEach>
-                    </select><br>
-                    <input id="soluong" class="form-control" type="number" placeholder="Số lượng"/><br>
-                    <button class="btn-success btn btn-chitiet fa fa-plus-circle">Thêm chi tiết</button>
+                        <select name="mausanpham" class="form-control" id="mau">
+                            <c:forEach var="index" items="${listColor}">
+                                <option value="${index.mamau}">${index.tenmau}</option>
+                            </c:forEach>
+                        </select><br>
+                        <input min="1" value="1" name="soluong" id="soluong" class="form-control" type="number" placeholder="Số lượng"/><br>
+                        <button class="btn-success btn btn-chitiet fa fa-plus-circle"> Thêm chi tiết</button>
+                    </div>
                 </div>
-
+                </form>
                 <div id="chi-tiet-san-pham-admin">
-                    <label>Chi tiết:</label><br>
-                    <select class="form-control" id="size">
-                        <c:forEach var="index" items="${listSize}">
-                            <option name="" value="${index.masize}">${index.size}</option>
-                        </c:forEach>
-                    </select><br>
+                        <label>Chi tiết:</label><br>
+                        <select name="sizesanpham" class="form-control" id="size">
+                            <c:forEach var="index" items="${listSize}">
+                                <option value="${index.masize}">${index.size}</option>
+                            </c:forEach>
+                        </select><br>
 
-                    <select class="form-control" id="mau">
-                        <c:forEach var="index" items="${listColor}">
-                            <option value="${index.mamau}">${index.tenmau}</option>
-                        </c:forEach>
-                    </select><br>
-                    <input id="soluong" class="form-control" type="number" placeholder="Số lượng"/><br>
-                    <button class="btn-success btn btn-chitiet fa fa-plus-circle">Thêm chi tiết</button>
+                        <select name="mausanpham" class="form-control" id="mau">
+                            <c:forEach var="index" items="${listColor}">
+                                <option value="${index.mamau}">${index.tenmau}</option>
+                            </c:forEach>
+                        </select><br>
+                        <input min="1" value="1" name="soluong" id="soluong" class="form-control" type="number" placeholder="Số lượng"/><br>
+                        <button class="btn-success btn btn-chitiet fa fa-plus-circle"> Thêm chi tiết</button>
                 </div>
 
-                <span>Giành cho:</span><br>
-                <label class="radio-inline"><input type="radio" name="gianhcho">Nam</label>
-                <label class="radio-inline"><input type="radio" name="gianhcho">Nữ</label>
                 <br><br>
                 <p>
-                    <button class="btn btn-success fa fa-cloud-upload">
+                    <button id="btn-themsp" class="btn btn-success fa fa-cloud-upload btn-themsp">
                         Thêm sản phẩm
                     </button>
                 </p>
