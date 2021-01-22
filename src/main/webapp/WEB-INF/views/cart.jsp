@@ -47,7 +47,7 @@
                     <c:choose>
                         <c:when test="${firstChar != null}">
                             <li>
-                                <a class="circle-avatar" href="<c:url value="/login/"/>">
+                                <a class="circle-avatar" href="<c:url value="/ProductAdmin"/>">
                                     <span>${firstChar}</span>
                                 </a>
                             </li>

@@ -209,7 +209,44 @@ $(function (){
     });
     $("body").on("click",".btn-chitiet",function (){
         $(this).remove();
-        var chitietClone = $("#chi-tiet-san-pham-admin").clone().removeAttr("id");
+        var chitietClone = $("#chi-tiet-san-pham-admin").clone().removeAttr("id").addClass("chitiet-sanpham");
         $("#container-chitiet-sanpham").append(chitietClone);
+    });
+
+
+    $("#btn-themsp").on("click", function (event){
+        event.preventDefault();//prevent from load form
+        var fields = $( "#form-sanpham" ).serializeArray();
+        var json = {}; //json object
+        var detailedProArr = [];
+
+        $.each(fields, function(i, field){
+            json[field.name] = field.value;
+        });
+        $("#container-chitiet-sanpham > .chitiet-sanpham").each(function (){
+            var detailProObject = {};
+            mausanpham = $(this).find('select[name="mausanpham"]').val();
+            sizesanpham = $(this).find('select[name="sizesanpham"]').val();
+            soluong = $(this).find('input[name="soluong"]').val();
+            detailProObject["mausanpham"] = mausanpham;
+            detailProObject["sizesanpham"] = sizesanpham;
+            detailProObject["soluong"] = soluong;
+            detailedProArr.push(detailProObject);
+
+        })
+        json["chitietsanpham"] = detailedProArr;
+        // $.ajax({
+        //     url: "/minishop/api/AddProductAdmin",
+        //     type: "POST",
+        //     cache: false,
+        //     data: { dataJson: JSON.stringify(json)
+        //     },
+        //     success: function (value){
+        //         if(value == "true") {
+        //             url = window.location.href;
+        //             window.location = url;
+        //         }
+        //     }
+        // })
     });
 })

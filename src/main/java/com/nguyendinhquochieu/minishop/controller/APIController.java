@@ -164,6 +164,12 @@ public class APIController {
         return "true";
     }
 
+    @PostMapping(path="AddProductAdmin")
+    @ResponseBody
+    public String AddProductAdmin(@RequestParam String dataJson) {
+        //{} is json object, [] -> json array
+        return "";
+    }
 
     //support function for add to cart api "/AddCart"
     private int checkAvailable(int masp, int masize, int mamau, HttpSession httpSession){
