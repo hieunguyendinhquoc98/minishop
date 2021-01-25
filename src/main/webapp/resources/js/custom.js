@@ -253,4 +253,87 @@ $(function (){
             }
         })
     });
+
+    $("#btn-cap-nhat-san-pham").on("click", function (event){
+        event.preventDefault();//prevent from load form
+        var fields = $( "#form-sanpham" ).serializeArray();
+        var json = {}; //json object
+        var detailedProArr = [];
+
+        $.each(fields, function(i, field){
+            if(field.name !== "mausanpham" && field.name !=="sizesanpham" && field.name !=="soluong")
+                json[field.name] = field.value;
+        });
+        $("#container-chitiet-sanpham > .chitiet-sanpham").each(function (){
+            var detailProObject = {};
+            mausanpham = $(this).find('select[name="mausanpham"]').val();
+            sizesanpham = $(this).find('select[name="sizesanpham"]').val();
+            soluong = $(this).find('input[name="soluong"]').val();
+            detailProObject["mauSanPham"] = mausanpham;
+            detailProObject["sizeSanPham"] = sizesanpham;
+            detailProObject["soluong"] = soluong;
+            detailedProArr.push(detailProObject);
+
+        })
+        json["chitietsanpham"] = detailedProArr;
+        json["hinhsanpham"] = tenhinh;
+        json["masanpham"] = masp;
+        $.ajax({
+            url: "/minishop/api/UpdateProductAdmin",
+            type: "POST",
+            cache: false,
+            data: { dataJson: JSON.stringify(json)
+            },
+            success: function (value){
+                if(value == "true") {
+                    alert("cap nhat sp thanh cong!");
+                    url = window.location.href;
+                    window.location = url;
+                }
+            }
+        })
+    });
+    var  masp = 0;
+    $("body").on("click",".capnhatsanpham" ,function (){
+        var masanpham = $(this).attr("data-id");
+
+        $("#btn-cap-nhat-san-pham").removeClass("hidden");
+        $("#btn-thoat").removeClass("hidden");
+        $("#btn-themsp").addClass("hidden");
+
+        $.ajax({
+            url: "/minishop/api/GetProductById",
+            type: "POST",
+            cache: false,
+            data: {
+                masanpham: masanpham,
+            },
+            success: function (value){
+                masp = value.masp;
+                console.log(value);
+                $("#product-name").val(value.tensanpham);
+                $("#price").val(value.giatien);
+                $("#description").val(value.mota);
+
+                if(value.gianhcho === "nam"){
+                    $("#rd-nam").prop('checked', true);
+                }else{
+                    $("#rd-nu").prop('checked', true);
+                }
+                $("#index").val(value.danhMucSanPham.madanhmuc);
+
+                $("#container-chitiet-sanpham").empty();
+                for(i = 0; i < value.chitietsanpham.length; i++){
+                    var chitietClone = $("#chi-tiet-san-pham-admin").clone().removeAttr("id");
+                    if(i < value.chitietsanpham.length - 1){
+                        chitietClone.find(".btn-chitiet").remove();
+                    }
+                    chitietClone.find("#mau").val(value.chitietsanpham[i].mausanpham.mamau);
+                    chitietClone.find("#size").val(value.chitietsanpham[i].sizeSanPham.masize);
+                    chitietClone.find("#soluong").val(value.chitietsanpham[i].soluong);
+                    $("#container-chitiet-sanpham").append(chitietClone);
+                }
+            }
+        })
+    });
 })

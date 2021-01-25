@@ -11,4 +11,5 @@ public interface ProductImp {
     SanPham getProductById(int idProduct);
     boolean deleteProductById(int idProduct);
     boolean addProduct(SanPham sanPham);
+    boolean updateProduct(SanPham sanPham);
 }

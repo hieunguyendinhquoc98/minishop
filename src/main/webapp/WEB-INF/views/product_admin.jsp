@@ -49,8 +49,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <input id="price" name="giatien" class="form-control" type="number" placeholder="Nhập giá tiền"/><br>
 
                 <span>Giành cho:</span><br>
-                <label class="radio-inline"><input type="radio" name="gianhcho" value="nam">Nam</label>
-                <label class="radio-inline"><input type="radio" name="gianhcho" value="nu">Nữ</label><br>
+                <label class="radio-inline" ><input id="rd-nam" type="radio" name="gianhcho" value="nam">Nam</label>
+                <label class="radio-inline" ><input id="rd-nu" type="radio" name="gianhcho" value="nu">Nữ</label><br>
 
                 <label for="index">Danh mục:</label>
                 <select name="danhMucSanPham" class="form-control" id="index">
@@ -103,8 +103,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                 <br><br>
                 <p>
-                    <button id="btn-themsp" class="btn btn-success fa fa-cloud-upload btn-themsp">
+                    <button id="btn-themsp" class="btn btn-success fa fa-plus-circle btn-themsp">
                         Thêm sản phẩm
+                    </button>
+                    <button id="btn-cap-nhat-san-pham" class="btn btn-primary fa fa-cloud-upload btn-themsp hidden">
+                        Cập nhật
+                    </button>
+                    <button id="btn-thoat" class="btn btn-danger fa fa-remove btn-themsp hidden">
+                        Thoát
                     </button>
                 </p>
             </div>
@@ -130,6 +136,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <td class="tensp" data-masp="${product.masanpham}">${product.tensanpham}</td>
                             <td class="giatien" >${product.giatien}</td>
                             <td class="gianhcho">${product.gianhcho}</td>
+                            <td style="color: white" class="capnhatsanpham btn btn-warning" data-id="${product.masanpham}">Sửa</td>
                         </tr>
                     </c:forEach>
                     </tbody>

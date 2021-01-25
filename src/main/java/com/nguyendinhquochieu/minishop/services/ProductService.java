@@ -37,4 +37,9 @@ public class ProductService implements ProductImp {
     public boolean addProduct(SanPham sanPham) {
         return productDAO.addProduct(sanPham);
     }
+
+    @Override
+    public boolean updateProduct(SanPham sanPham) {
+        return productDAO.updateProduct(sanPham);
+    }
 }

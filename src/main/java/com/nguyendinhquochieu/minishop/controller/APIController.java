@@ -124,17 +124,18 @@ public class APIController {
     @ResponseBody
     public String LoadProductAdmin(@RequestParam int soluong) {
 
-        String html ="";
+        StringBuilder html = new StringBuilder();
         List<SanPham> sanPhamList = productService.getListHotProduct(soluong);
         for (SanPham product: sanPhamList ) {
-            html+="<tr>";
-            html+="<td><div class=\"checkbox\"><label><input name=\"product-checkbox\" type=\"checkbox\" value=\" '" +product.getMasanpham()+" '\"></label></div></td>\n";
-            html+="<td class=\"tensp\" data-masp='"+ product.getMasanpham()+"'>"+ product.getTensanpham()+"</td>";
-            html+="<td class=\"giatien\" >"+ product.getGiatien()+"</td>";
-            html+="<td class=\"gianhcho\">"+ product.getGianhcho()+"</td>";
-            html+="</tr>";
+            html.append("<tr>");
+            html.append("<td><div class=\"checkbox\"><label><input name=\"product-checkbox\" type=\"checkbox\" value=\" '").append(product.getMasanpham()).append(" '\"></label></div></td>\n");
+            html.append("<td class=\"tensp\" data-masp='").append(product.getMasanpham()).append("'>").append(product.getTensanpham()).append("</td>");
+            html.append("<td class=\"giatien\" >").append(product.getGiatien()).append("</td>");
+            html.append("<td class=\"gianhcho\">").append(product.getGianhcho()).append("</td>");
+            html.append("<td style=\"color: white\" class=\"capnhatsanpham btn btn-warning\" data-id='").append(product.getMasanpham()).append(">Sửa</td>\n");
+            html.append("</tr>");
         }
-            return html;
+            return html.toString();
     }
     @GetMapping(path="DeleteProductAdmin")
     @ResponseBody
@@ -218,7 +219,104 @@ public class APIController {
             return ""+ productService.addProduct(sanPham);
         }
     }
+    @PostMapping(path="UpdateProductAdmin")
+    @ResponseBody
+    public String UpdateProductAdmin(@RequestParam String dataJson) {
+        System.out.println(dataJson);
+        //{} is json object, [] -> json array
+        ObjectMapper objectMapper = new ObjectMapper();
+        SanPham sanPham = new SanPham();
+        try {
+            DanhMucSanPham danhMucSanPham = new DanhMucSanPham();
 
+            JsonNode jsonNode = objectMapper.readTree(dataJson);
+
+            danhMucSanPham.setMadanhmuc(jsonNode.get("danhMucSanPham").asInt());
+            JsonNode jsonChiTiet = jsonNode.get("chitietsanpham");
+            Set<ChiTietSanPham> listChiTiet = new HashSet<>();
+
+            for(JsonNode objectChiTiet : jsonChiTiet){
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
+
+                MauSanPham mauSanPham = new MauSanPham();
+                mauSanPham.setMamau(objectChiTiet.get("mauSanPham").asInt());
+                chiTietSanPham.setMausanpham(mauSanPham);
+
+                SizeSanPham sizeSanPham = new SizeSanPham();
+                sizeSanPham.setMasize(objectChiTiet.get("sizeSanPham").asInt());
+                chiTietSanPham.setSizeSanPham(sizeSanPham);
+
+                chiTietSanPham.setSoluong(objectChiTiet.get("soluong").asInt());
+                listChiTiet.add(chiTietSanPham);
+
+            }
+            String tensanpham = jsonNode.get("tensanpham").asText();
+            String giatien = jsonNode.get("giatien").asText();
+            String mota = jsonNode.get("mota").asText();
+            String hinhsanpham = jsonNode.get("hinhsanpham").asText();
+            String gianhcho = jsonNode.get("gianhcho").asText();
+            int masanpham = jsonNode.get("masanpham").asInt();
+
+            sanPham.setChitietsanpham(listChiTiet);
+            sanPham.setDanhMucSanPham(danhMucSanPham);
+            sanPham.setTensanpham(tensanpham);
+            sanPham.setGiatien(giatien);
+            sanPham.setMota(mota);
+            sanPham.setHinhsanpham(hinhsanpham);
+            sanPham.setGianhcho(gianhcho);
+            sanPham.setMasanpham(masanpham);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(productService.updateProduct(sanPham)){
+            System.out.println("cap nhat sp thanh cong" + productService.updateProduct(sanPham));
+            return ""+ productService.updateProduct(sanPham);
+        }
+        else {
+            System.out.println("cap nhat sp that bai" + productService.updateProduct(sanPham));
+            return ""+ productService.updateProduct(sanPham);
+        }
+    }
+    @PostMapping(path="GetProductById", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public JSON_SanPham GetProductByID(@RequestParam int masanpham){
+        JSON_SanPham json_sanPham = new JSON_SanPham();
+        SanPham sanPham = productService.getProductById(masanpham);
+
+        json_sanPham.setMasanpham(sanPham.getMasanpham());
+        json_sanPham.setTensanpham(sanPham.getTensanpham());
+        json_sanPham.setGiatien(sanPham.getGiatien());
+        json_sanPham.setMota(sanPham.getMota());
+        json_sanPham.setHinhsanpham(sanPham.getHinhsanpham());
+        json_sanPham.setGianhcho(sanPham.getGianhcho());
+
+        DanhMucSanPham danhMucSanPham = new DanhMucSanPham();
+        danhMucSanPham.setMadanhmuc(sanPham.getDanhMucSanPham().getMadanhmuc());
+        danhMucSanPham.setTendanhmuc(sanPham.getDanhMucSanPham().getTendanhmuc());
+
+        Set<ChiTietSanPham> chiTietSanPhamSet = new HashSet<>();
+        for (ChiTietSanPham value: sanPham.getChitietsanpham()){
+            ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
+            chiTietSanPham.setMachitietsanpham(value.getMachitietsanpham());
+
+            MauSanPham mauSanPham = new MauSanPham();
+            mauSanPham.setMamau(value.getMausanpham().getMamau());
+            mauSanPham.setTenmau(value.getMausanpham().getTenmau());
+            chiTietSanPham.setMausanpham(mauSanPham);
+
+            SizeSanPham sizeSanPham = new SizeSanPham();
+            sizeSanPham.setMasize(value.getSizeSanPham().getMasize());
+            sizeSanPham.setSize(value.getSizeSanPham().getSize());
+
+            chiTietSanPham.setSizeSanPham(sizeSanPham);
+            chiTietSanPham.setSoluong(value.getSoluong());
+            chiTietSanPhamSet.add(chiTietSanPham);
+        }
+
+        json_sanPham.setDanhMucSanPham(danhMucSanPham);
+        json_sanPham.setChitietsanpham(chiTietSanPhamSet);
+        return json_sanPham;
+    }
     //support function for add to cart api "/AddCart"
     private int checkAvailable(int masp, int masize, int mamau, HttpSession httpSession){
         if(httpSession.getAttribute("cart") != null) {
