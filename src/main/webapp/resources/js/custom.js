@@ -293,6 +293,11 @@ $(function (){
             }
         })
     });
+    $("#btn-thoat").on("click",function (){
+        $("#btn-themsp").removeClass("hidden");
+        $("#btn-cap-nhat-san-pham").addClass("hidden");
+        $("#btn-thoat").addClass("hidden");
+    });
     var  masp = 0;
     $("body").on("click",".capnhatsanpham" ,function (){
         var masanpham = $(this).attr("data-id");
